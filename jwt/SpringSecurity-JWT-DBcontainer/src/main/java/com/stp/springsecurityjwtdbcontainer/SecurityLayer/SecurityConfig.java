@@ -42,33 +42,16 @@ public class SecurityConfig {
                 .authorizeHttpRequests ()
                 .requestMatchers (
                         "/",
-                        "/api/v1/auth/**",
-                        "/api/games/**",
-                        "/api/categories/**",
-                        "/api/chapters/**",
-                        "/api/images/**"
+                        "/api/v1/auth/**"
 
                 )
                 .permitAll ()
                 .requestMatchers (
-                        "/api/comment",
-                        "/api/users/**",
-                        "/api/review",
-                        "/api/review/**",
-                        "/profil/**",
-                        "/api/updateInfo/{username}",
-                        "/api/updateInfo/{username}**",
-                        "/api/comment/update/{commentId}",
-                        "/api/comment/update/{commentId}**",
-                        "/api/review/update/{reviewId}",
-                        "/api/review/update/{reviewId}**")
+                        "/api/comment"
+                )
                 .hasAnyAuthority (Role.USER.name (),Role.ADMIN.name (),Role.MODERATOR.name ())
                 .requestMatchers (
-                        "/api/users/{username}/listOfUsers/**",
-                        "/api/users/{username}/listOfUsers",
-                        "/api/games/delete/**",
-                        "/api/upgrade/{username}",
-                        "/api/downgrade/{username}")
+                        "/api/users/{username}/listOfUsers/**")
                 .hasAuthority (Role.ADMIN.name ())
                 .anyRequest ()
                 .authenticated ()
