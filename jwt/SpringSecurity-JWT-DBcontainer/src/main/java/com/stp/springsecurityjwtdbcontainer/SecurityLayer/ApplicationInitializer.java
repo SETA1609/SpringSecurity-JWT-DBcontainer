@@ -50,6 +50,23 @@ public class ApplicationInitializer {
         };
     }
 
+    @Bean
+    public CommandLineRunner createDefaultMod(EnduserRepository enduserRepository, PasswordEncoder passwordEncoder) {
+        return args -> {
+            String defaultModUsername = "mod";
+            String defaultUserPassword = "mod";
 
+            if (!enduserRepository.findByUsername(defaultModUsername).isPresent()) {
+                Enduser user = Enduser.builder()
+                        .username(defaultModUsername)
+                        .email("user@example.com")
+                        .password(passwordEncoder.encode(defaultUserPassword))
+                        .role(Role.MODERATOR)
+                        .build();
+
+                enduserRepository.save(user);
+            }
+        };
+    }
 
 }
